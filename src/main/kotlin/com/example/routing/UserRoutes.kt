@@ -8,14 +8,13 @@ import com.example.models.user.UserResponse
 import com.example.utils.TokenManager
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.config.*
-import io.ktor.server.config.yaml.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.ktorm.dsl.*
 import org.mindrot.jbcrypt.BCrypt
-import java.util.*
 
 
 fun Routing.authRoutes(){
@@ -23,6 +22,7 @@ fun Routing.authRoutes(){
 
     registerUser()
     login()
+    getData()
 }
 
 fun Routing.registerUser(){
@@ -93,6 +93,9 @@ fun Routing.registerUser(){
 }
 fun Routing.login() {
     val db = DatabaseConnection.databaseNote
+
+    val tokenManager=TokenManager()
+
     post("/login"){
 
         val response=call.receive<UserResponse>()
@@ -135,6 +138,7 @@ fun Routing.login() {
                 return@post
             }else{
                 val doesPassMatch=BCrypt.checkpw(password,user.password)
+                val token=tokenManager.generateJWTToken(user.email,user.password)
                 if (doesPassMatch){
                     call.respond(
                         UserGenericRequest(
@@ -144,7 +148,7 @@ fun Routing.login() {
                                 email=user.email,
                                 password=user.password
                             ),
-                            message = "token"
+                            message = token
                         )
                     )
                 }else{
@@ -163,4 +167,38 @@ fun Routing.login() {
         }
     }
 
+}
+fun Routing.getData(){
+    post("/login2") {
+       val tokenManager=TokenManager()
+        val user = call.receive<UserResponse>()
+        // Check username and password
+        // ...
+       val token= tokenManager.generateJWTToken(value1 = user.email,user.password)
+        call.respond(
+            HttpStatusCode.OK,
+            mapOf(
+                "token" to token,
+                "message note:" to "wordga solib oq qog`ozga chiqarib yodlab yur",
+
+            )
+        )
+    }
+    authenticate("auth-jwt") {
+        get("/hello") {
+            val principal = call.principal<JWTPrincipal>()
+            val email = principal!!.payload.getClaim("key").asString()
+            val password = principal!!.payload.getClaim("keyforpass").asString() //toInt()
+            val expiresAt = principal.expiresAt?.time?.minus(System.currentTimeMillis())
+
+            call.respond(
+                HttpStatusCode.OK,
+                mapOf(
+                    "username" to email,
+                    "password" to password,
+                    "a" to "axaxa"
+                )
+            )
+        }
+    }
 }
