@@ -69,6 +69,8 @@ install the latest MySQL proposed by Ubuntu.
 
         service mysql start
 
+        SHOW GLOBAL VARIABLES LIKE 'PORT';
+
         service mysql status
 
         service mysql stop
@@ -92,6 +94,20 @@ We then flush all the privileges. This will refresh MySQL and allow us to use th
         
         flush privileges;
 
+Database Creation
+
+        CREATE DATABASE databasename;
+        SHOW DATABASES;
+        USE databasename;
+
+        CREATE TABLE tablename (
+          id INT(11) NOT NULL AUTO_INCREMENT,
+          c2 VARCHAR(255) NOT NULL,
+          PRIMARY KEY (id)
+        ) ENGINE=InnoDB;
+
+        show table
+        DESCRIBE tablename;
 
 
         
