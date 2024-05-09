@@ -59,3 +59,46 @@ Close the Java Application:
         kill <PID>
         killall -21 java
   
+
+
+install the latest MySQL proposed by Ubuntu.
+
+        apt install mysql-server
+
+        service mysql restart
+
+        service mysql start
+
+        service mysql status
+
+        service mysql stop
+        
+        
+Set initial MySQL root password
+
+        ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mypassword';
+        login: mysql -u root -p
+
+Secure MySQL server
+        sudo mysql_secure_installation
+
+
+Add a new user
+
+        CREATE USER 'didier'@'localhost' IDENTIFIED WITH mysql_native_password BY '%$HmbKe#XeVtn8i%mX$Ha&v2on%crUWc';
+
+We then flush all the privileges. This will refresh MySQL and allow us to use that user immediately.
+        
+        flush privileges;
+
+
+
+        
+
+
+
+
+        
+
+
+
