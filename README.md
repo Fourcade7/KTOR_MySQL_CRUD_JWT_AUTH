@@ -66,7 +66,9 @@ Install Java on Ubuntu 22.04
 
 Run the Java Application in Background:
 
-        java -jar MyApp.jar &
+        java -jar MyApp.jar &  //onbackground
+        java -jar MyApp.jar    //simple
+        java -jar MyApp
 
 Close the Java Application:
 
