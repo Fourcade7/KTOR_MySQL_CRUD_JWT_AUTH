@@ -108,6 +108,7 @@ Database Creation
 
         show table
         DESCRIBE tablename;
+        SELECT * FROM tablename;
 
 
         
