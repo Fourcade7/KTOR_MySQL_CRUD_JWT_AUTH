@@ -6,7 +6,6 @@ New Project
 
 
 
-
 Creating fat JARs using the Ktor Gradle plugin Open the build.gradle.kts
 
         plugins {
@@ -47,6 +46,22 @@ Database Connection MySql
         implementation("org.ktorm:ktorm-core:3.6.0")
         // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
         implementation("com.mysql:mysql-connector-j:8.3.0")
+
+
+SERVER SETTINGS
+
+
+
+Install Java on Ubuntu 22.04
+
+        apt-cache search openjdk
+        apt install openjdk-21-jdk
+        java -version
+        javac -version
+
+        cd folder wget -O filename.jar URL_of_the_file_to_download
+        wget -O myfile.zip https://example.com/path/to/file.zip
+
 
 
 Run the Java Application in Background:
@@ -109,6 +124,7 @@ Database Creation
         show table
         DESCRIBE tablename;
         SELECT * FROM tablename;
+        SHOW TABLES;
 
 
         
