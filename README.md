@@ -66,6 +66,7 @@ Install Java on Ubuntu 22.04
 
 Run the Java Application in Background:
 
+        nohup java -jar test.jar &
         java -jar MyApp.jar &  //onbackground
         java -jar MyApp.jar    //simple
         java -jar MyApp
