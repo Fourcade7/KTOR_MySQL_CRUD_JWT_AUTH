@@ -80,6 +80,7 @@ Set initial MySQL root password
         login: mysql -u root -p
 
 Secure MySQL server
+
         sudo mysql_secure_installation
 
 
